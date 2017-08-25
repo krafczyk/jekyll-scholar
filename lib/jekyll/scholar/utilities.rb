@@ -584,7 +584,7 @@ module Jekyll
       end
 
       def render_citation(items)
-        renderer.render items.zip(locators.zip(labels)).map { |entry, (locator, label)|
+	map_result = items.zip(locators.zip(labels)).map { |entry, (locator, label)|
           cited_keys << entry.key
           cited_keys.uniq!
 
@@ -593,7 +593,8 @@ module Jekyll
           item.label = label unless label.nil?
 
           item
-        }, styles(style).citation
+        }
+        renderer.render map_result, styles(style).citation
       end
 
       def render_bibliography(entry, index = nil)
